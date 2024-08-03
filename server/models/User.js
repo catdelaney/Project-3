@@ -25,8 +25,24 @@ const userSchema = new Schema({
       ref: 'Thought',
     },
   ],
+  articles: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "article",
+    },
+  ],
+},
+{
+  toJSON: {
+    virtuals: true,
+  },
+  id: false,
+}
+);
+// Increases article count in User model object when articles are added by a user
+userSchema.virtual("articleCount").get(function () {
+  return this.articles.length;
 });
-
 userSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
     const saltRounds = 10;
