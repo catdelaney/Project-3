@@ -21,7 +21,7 @@ const articleSchema = new Schema(
       type: Date,
       default: Date.now,
     },
-    username: {
+    articleAuthor: {
       type: String,
       required: true,
     },
@@ -41,7 +41,7 @@ articleSchema.virtual("commentCount").get(function () {
 });
 
 // Creates Article model with articleSchema
-const Article = model("article", articleSchema);
+const Article = model("Article", articleSchema);
 
 // Exports
 module.exports = Article;
